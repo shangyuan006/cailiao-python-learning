@@ -28,7 +28,7 @@ root = ThemedTk(theme="arc")
 root.title("天气预报")
 
 # 设置窗口大小
-root.geometry("450*400")
+root.geometry("450×400")
 
 # 让窗口居中
 window_width = root.winfo_reqwidth()
@@ -60,6 +60,7 @@ def fetch_weather(event=None):
     if not city_name:
         result.set("请输入城市名称：")
         return
+    
     
     if city_name[0] >= u'\u4e00' and city_name[-1] <= u'\u9fff':
         city_name = ''.join(lazy_pinyin(city_name))
