@@ -4,7 +4,7 @@ import sys
 import random
 
 # 显示分数的函数
-def display_screen(screen,score):
+def display_score(screen,score):
     font = pygame.font.Font(None, 36)   # 设置字体大小
     text = font.render(f"Score: {score}", True, (255, 255, 255))    # 渲染分数文字
     screen.blit(text, (10, 10))     # 在屏幕上显示分数
