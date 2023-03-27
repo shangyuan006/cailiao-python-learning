@@ -28,7 +28,7 @@ def display_start_screen(screen):
 # 处理输入事件的函数
 def process_input_events(running, direction, change_to, pause, screen):
     for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN:        # TODO:烂尾了，小红书作者缺少
+        if event.type == pygame.KEYDOWN:        # TODO:烂尾了，小红书作者缺少       // 通过 cursor 补全
             if event.key == pygame.K_RIGHT and direction != "LEFT":
                 change_to = "RIGHT"
             elif event.key == pygame.K_LEFT and direction != "RIGHT":
@@ -59,7 +59,7 @@ def process_input_events(running, direction, change_to, pause, screen):
 
 
 # 更新蛇的位置
-def update_snake_position(snake_position, direction, block_size):       # TODO:烂尾了，小红书作者缺少
+def update_snake_position(snake_position, direction, block_size):       # TODO:烂尾了，小红书作者缺少       // 通过 cursor 补全
     if direction == "RIGHT":
         snake_position[0] += block_size
     elif direction == "LEFT":
