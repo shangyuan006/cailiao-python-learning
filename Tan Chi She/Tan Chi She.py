@@ -29,10 +29,46 @@ def display_start_screen(screen):
 def process_input_events(running, direction, change_to, pause, screen):
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:        # TODO:烂尾了，小红书作者缺少
+            if event.key == pygame.K_RIGHT and direction != "LEFT":
+                change_to = "RIGHT"
+            elif event.key == pygame.K_LEFT and direction != "RIGHT":
+                change_to = "LEFT"
+            elif event.key == pygame.K_UP and direction != "DOWN":
+                change_to = "UP"
+            elif event.key == pygame.K_DOWN and direction != "UP":
+                change_to = "DOWN"
+            elif event.key == pygame.K_ESCAPE:
+                running = False
+            elif event.key == pygame.K_SPACE:
+                pause = not pause
+            elif event.key == pygame.K_RETURN:
+                if not running:
+                    running = True
+                    display_start_screen(screen)
+                    pygame.time.wait(1000)
+                    snake_position = [100, 200]
+                    snake_body = [[100, 100], [90, 100], [80, 100]]
+                    food_position = [random.randrange(1, 32) * 20, random.randrange(1, 24) * 20]
+                    food_spawn = True
+                    direction = "RIGHT"
+                    change_to = direction
+                    score = 0
+        elif event.type == pygame.QUIT:
+            running = False
+    return running, change_to, pause
+
 
 # 更新蛇的位置
 def update_snake_position(snake_position, direction, block_size):       # TODO:烂尾了，小红书作者缺少
-
+    if direction == "RIGHT":
+        snake_position[0] += block_size
+    elif direction == "LEFT":
+        snake_position[0] -= block_size
+    elif direction == "UP":
+        snake_position[1] -= block_size
+    elif direction == "DOWN":
+        snake_position[1] += block_size
+    return snake_position
 
 # 显示游戏结束屏幕的函数
 def display_game_over_screen(screen, score):
