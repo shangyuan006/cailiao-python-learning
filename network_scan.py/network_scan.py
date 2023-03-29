@@ -15,7 +15,7 @@ def center_window(window, width=None, height=None):
     y = (screen_height // 2) - (height // 2)
     window.geometry(f"{width}x{height}+{x}+{y}")
 
-def change_font(font_family)：
+def change_font(font_family):
     result_text.config(font=(font_family, 10))
 
 def extract_data(url):
@@ -60,5 +60,5 @@ def display_data(data):
     result_text.config(status='disabled')
 
 def start_scraping(event=None):
-    
+
 
