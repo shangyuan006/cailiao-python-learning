@@ -60,5 +60,31 @@ def display_data(data):
     result_text.config(status='disabled')
 
 def start_scraping(event=None):
+    url = url_entry.get()
+    extract_data(url)
 
+root = tk.Tk()
+root.title("网页爬取工具")
+root.geometry("600x200")
+center_window(root)
+
+url_label = ttk.Label(root, text="请输入网址", font=("微软雅黑", 12))
+url_label.pack()
+
+url_entry = ttk.Entry(root, width=50, font=("微软雅黑", 12))
+url_entry.pack()
+url_entry.bind('<Return>', start_scraping)
+
+start_button = ttk.Button(root, text="开始爬取", command=start_scraping)
+start_button.pack(pady=5)
+
+font_label = ttk.Label(root, text="选择字体", font=("微软雅黑", 12))
+font_label.pack()
+
+font_var = tk.StringVar()
+font_var.set("微软雅黑")
+font_optionmenu = ttk.OptionMenu(root, font_var, "微软雅黑", "宋体", "黑体", "楷体", "仿宋", command=change_font)
+font_optionmenu.pack()
+
+root.mainloop()
 
