@@ -29,7 +29,7 @@ class APP:
         frame_3 = tk.Frame(self.root)
 
         # Menu菜单
-        menu = ttk.Menu(self.root)
+        menu = tk.Menu(self.root)
         self.root.config(menu=menu)
         moviemenu = tk.Menu(menu, tearoff=0)
         menu.add_cascade(label='友情链接', menu=moviemenu)
@@ -39,7 +39,7 @@ class APP:
         moviemenu.add_command(label='搜狐视频', command=lambda: webbrowser.open('http://tv.sohu.com/'))
         moviemenu.add_command(label='芒果TV', command=lambda: webbrowser.open('http://www.mqtv.com/'))
         moviemenu.add_command(label='爱奇艺', command=lambda: webbrowser.open('http://www.iqiyi.com/'))
-        moviemenu.add_command(label='PPTV', command=lambda: webbrowser.open('http://www.bilibili.com/'))        //TODO: 这很奇怪，PPTV写着bilibili的地址
+        moviemenu.add_command(label='PPTV', command=lambda: webbrowser.open('http://www.bilibili.com/'))        # TODO: 这很奇怪，PPTV写着bilibili的地址
         moviemenu.add_command(label='优酷', command=lambda: webbrowser.open('http://www.youku.com/'))
         moviemenu.add_command(label='乐视', command=lambda: webbrowser.open('http://www.le.com/'))
         moviemenu.add_command(label='土豆', command=lambda: webbrowser.open('http://www.tudou.com/'))
@@ -54,7 +54,7 @@ class APP:
         label1 = tk.Label(frame_2, text="请输入视频链接：")
         entry = tk.Entry(frame_2, textvariable=self.url, highlightcolor='Fuchsia', highlightthickness=1, width=35)
         label2 = tk.Label(frame_2, text=" ")
-        play = tk.Button(frame_2, text="播放", font('楷体', 12), fg='Purple', width=2, height=1,
+        play = tk.Button(frame_2, text="播放", font=('楷体', 12), fg='Purple', width=2, height=1,
                          command=self.video_play)
         label3 = tk.Label(frame_2, text=" ")
         label_explain = tk.Label(frame_3, fg='red', font=('楷体', 18),
@@ -99,4 +99,49 @@ class APP:
                 webbrowser.open(port_1 + self.url.get())
             elif self.v.get() == 2:
                 # 链接获取
-                
+                ip = self.url.get()
+                # 链接加密
+                ip = parse.quote_plus(ip)
+                # 获取time、key、url
+                get_url = 'http://www.wmxz.wang/video.php?url=%s' % ip
+                # 请求之后立刻打开
+                webbrowser.open(get_url)
+            elif self.v.get() == 3:
+                # 链接获取
+                ip = self.url.get()
+                # 链接加密
+                ip = parse.quote_plus(ip)
+                # 获取time、key、url
+                get_url = 'http://www.ckmov.vip/api.php?url=%s' % ip
+                # 请求之后立刻打开
+                webbrowser.open(get_url)
+
+        else:
+            msgbox.showerror(title='错误', message='视频链接地址无效，请重新输入！')
+
+    """
+    函数说明：tkinter窗口居中
+    """
+
+    def center(self):
+        ws = self.root.winfo_screenwidth()
+        hs = self.root.winfo_screenheight()
+        x = int((ws / 2) - (self.w / 2))
+        y = int((hs / 2) - (self.h / 2))
+        self.root.geometry('{}x{}+{}x{}'.format(self.w, self.h, x, y))
+
+    """
+    函数说明：loop等待用户事件
+    """
+
+    def loop(self):
+        # 禁止修改窗口大小
+        self.root.resizable(False, False)
+        # 窗口居中
+        self.center()
+        self.root.mainloop()
+
+
+if __name__ == '__main__':
+    app = APP()     # 实例化APP对象
+    app.loop()      # loop等待用户事件
